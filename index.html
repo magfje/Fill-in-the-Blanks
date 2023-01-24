@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fill-in-the-Blanks</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "JetBrains Mono", monospace;
+        background-color: #2e3440;
+        color: #eceff4;
+      }
+
+      .main {
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+        padding: 8rem;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .textField {
+        width: 60rem;
+        font-size: 2rem;
+      }
+
+      button {
+        width: 11rem;
+        height: 3rem;
+        font-size: 1.2rem;
+        margin: 1rem 0.3rem;
+        border: none;
+        border-radius: 0.5rem;
+        background-color: transparent;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        transition: ease 0.2s;
+      }
+
+      button:hover {
+        background-color: #3b4252;
+        cursor: pointer;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 0px 0px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        text-shadow: 0 0 8px #eceff4;
+      }
+
+      button.pressed {
+        background-color: #3b4252;
+        cursor: default;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 0px 0px;
+      }
+
+      .b1,
+      word1 {
+        color: #bf616a;
+        text-shadow: 0 0 10px #bf616a, 0 0 30px #bf616a;
+        background-color: transparent;
+      }
+
+      .b2,
+      word2 {
+        color: #d08770;
+        text-shadow: 0 0 10px #d08770, 0 0 30px #d08770;
+        background-color: transparent;
+      }
+
+      .b3,
+      word3 {
+        color: #8fbcbb;
+        text-shadow: 0 0 10px #8fbcbb, 0 0 30px #8fbcbb;
+        background-color: transparent;
+      }
+
+      .b4,
+      word4 {
+        color: #5e81ac;
+        text-shadow: 0 0 10px #5e81ac, 0 0 30px #5e81ac;
+        background-color: transparent;
+      }
+
+      .b5,
+      word5 {
+        color: #b48ead;
+        text-shadow: 0 0 10px #b48ead, 0 0 30px #b48ead;
+        background-color: transparent;
+      }
+
+      /* SCALINGSTUFF FROM https://websemantics.uk/tools/responsive-font-calculator/ */
+      @media (min-width: 20em) {
+        :root {
+          font-size: calc(0.54rem + ((1vw - 0.48rem) * 0.6944));
+          min-height: 0vw;
+        }
+      }
+      @media (min-width: 120em) {
+        :root {
+          font-size: 1.1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="main"></div>
+
+    <script>
+      //MODEL assign variables
+      let word1 = "";
+      let word2 = "";
+      let word3 = "";
+      let word4 = "";
+      let word5 = "";
+      const buttons = document.getElementsByTagName("button");
+
+      //VIEW render the view
+      view();
+      //sets the default html on the page
+      function view() {
+        document.getElementById("app").innerHTML = /* html */ `
+              <h1>Fill-in-the-Blanks</h1>
+            <div class="textField">
+              The <word1>${
+                word1 || "____"
+              }</word1> sorcerer sought the <word2>${
+          word2 || "____"
+        }</word2> artifact
+              to unlock the <word3>${
+                word3 || "____"
+              }</word3> power within. But the
+              <word4>${
+                word4 || "____"
+              }</word4> guardian stood in his way, wielding a
+              <word5>${word5 || "____"}</word5> weapon.
+            </div>
+
+            <div class="words">
+              <button class="b1">ambitious</button>
+              <button class="b1">ruthless</button>
+              <button class="b1">megalomaniac</button>
+              <button class="b1">cunning</button>
+              <button class="b1">calculating</button>
+              <br />
+              <button class="b2">ancient</button>
+              <button class="b2">powerful</button>
+              <button class="b2">mystical</button>
+              <button class="b2">arcane</button>
+              <button class="b2">legendary</button>
+              <br />
+              <button class="b3">hidden</button>
+              <button class="b3">forbidden</button>
+              <button class="b3">immense</button>
+              <button class="b3">potent</button>
+              <button class="b3">transformative</button>
+              <br />
+              <button class="b4">formidable</button>
+              <button class="b4">fierce</button>
+              <button class="b4">unyielding</button>
+              <button class="b4">stalwart</button>
+              <button class="b4">relentless</button>
+              <br />
+              <button class="b5">enchanted</button>
+              <button class="b5">deadly</button>
+              <button class="b5">legendary</button>
+              <button class="b5">ancient</button>
+              <button class="b5">powerful</button>
+            </div>
+              `;
+
+        //finds buttons on page
+        getButtons();
+      }
+
+      //CONTROLLER
+      //using if statemets to determine where the words should go
+      function setWord() {
+        if (this.classList.contains("b1")) {
+          word1 = this.innerHTML;
+        } else if (this.classList.contains("b2")) {
+          word2 = this.innerHTML;
+        } else if (this.classList.contains("b3")) {
+          word3 = this.innerHTML;
+        } else if (this.classList.contains("b4")) {
+          word4 = this.innerHTML;
+        } else if (this.classList.contains("b5")) {
+          word5 = this.innerHTML;
+        }
+
+        view();
+      }
+      //for loop to iterate through all the buttons on the page
+      function getButtons() {
+        for (let button of buttons /* let i = 0; i < buttons.length; i++ */) {
+          button.addEventListener("click", setWord);
+
+          //checks if the word == button, and adds a class .pressed to that button
+          if (button.classList.contains("b1") && word1 == button.innerHTML) {
+            button.classList.add("pressed");
+          } else if (
+            button.classList.contains("b2") &&
+            word2 == button.innerHTML
+          ) {
+            button.classList.add("pressed");
+          } else if (
+            button.classList.contains("b3") &&
+            word3 == button.innerHTML
+          ) {
+            button.classList.add("pressed");
+          } else if (
+            button.classList.contains("b4") &&
+            word4 == button.innerHTML
+          ) {
+            button.classList.add("pressed");
+          } else if (
+            button.classList.contains("b5") &&
+            word5 == button.innerHTML
+          ) {
+            button.classList.add("pressed");
+          } else button.classList.remove("pressed");
+        }
+      }
+      // !NOT WOKRING
+      /*       function isPressed() {
+              if (this.classList.contains("b1") && word1 == this.innerHTML) {
+                this.classList.add("pressed");
+              } else if (this.classList.contains("b2") && word2 == this.innerHTML) {
+                this.classList.add("pressed");
+              } else if (this.classList.contains("b3") && word3 == this.innerHTML) {
+                this.classList.add("pressed");
+              } else if (this.classList.contains("b4") && word4 == this.innerHTML) {
+                this.classList.add("pressed");
+              } else if (this.classList.contains("b5") && word5 == this.innerHTML) {
+                this.classList.add("pressed");
+              } else this.classList.remove("pressed"); */
+
+      /* this.classList.add("pressed");
+              this.buttonIsPressed = true;
+              currentButton = this.outerHTML; */
+    </script>
+  </body>
+</html>
