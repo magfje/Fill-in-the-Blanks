@@ -183,15 +183,15 @@
       //using if statemets to determine where the words should go
       function setWord() {
         if (this.classList.contains("b1")) {
-          word1 = this.innerHTML;
+          word1 = this.textContent;
         } else if (this.classList.contains("b2")) {
-          word2 = this.innerHTML;
+          word2 = this.textContent;
         } else if (this.classList.contains("b3")) {
-          word3 = this.innerHTML;
+          word3 = this.textContent;
         } else if (this.classList.contains("b4")) {
-          word4 = this.innerHTML;
+          word4 = this.textContent;
         } else if (this.classList.contains("b5")) {
-          word5 = this.innerHTML;
+          word5 = this.textContent;
         }
 
         view();
@@ -202,26 +202,26 @@
           button.addEventListener("click", setWord);
 
           //checks if the word == button, and adds a class .pressed to that button
-          if (button.classList.contains("b1") && word1 == button.innerHTML) {
+          if (button.classList.contains("b1") && word1 == button.textContent) {
             button.classList.add("pressed");
           } else if (
             button.classList.contains("b2") &&
-            word2 == button.innerHTML
+            word2 == button.textContent
           ) {
             button.classList.add("pressed");
           } else if (
             button.classList.contains("b3") &&
-            word3 == button.innerHTML
+            word3 == button.textContent
           ) {
             button.classList.add("pressed");
           } else if (
             button.classList.contains("b4") &&
-            word4 == button.innerHTML
+            word4 == button.textContent
           ) {
             button.classList.add("pressed");
           } else if (
             button.classList.contains("b5") &&
-            word5 == button.innerHTML
+            word5 == button.textContent
           ) {
             button.classList.add("pressed");
           } else button.classList.remove("pressed");
